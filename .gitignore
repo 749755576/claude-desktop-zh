@@ -1,0 +1,11 @@
+# secrets — never commit
+.env
+
+# translator artifacts (regenerable)
+check-reports/
+__pycache__/
+*.pyc
+
+# os
+Thumbs.db
+.DS_Store

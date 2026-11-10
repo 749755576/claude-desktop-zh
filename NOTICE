@@ -1,0 +1,10 @@
+This repository is not affiliated with Anthropic. "Claude" and related names are
+trademarks of Anthropic PBC.
+
+UI string data includes community translation contributions originally published
+by RICK (linux.do/t/topic/2040184) and Pheo Hu (github.com/pheohu-42) under
+CC BY-NC-SA 4.0; their attribution is retained here as the license requires.
+
+This distribution additionally contains substantial new work: 4.x asar layout
+support, per-file integrity regeneration, embedded digest patching, a rewritten
+translation pipeline, and an expanded translation catalog.
