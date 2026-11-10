@@ -598,7 +598,7 @@ function Install-AsarPatch {
         throw "缺少 Python 3"
     }
 
-    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$scriptDir = $PSScriptRoot
     $asarTool = Join-Path $scriptDir "..\tools\asar_tool.py"
     if (-not (Test-Path -LiteralPath $asarTool -PathType Leaf)) {
         throw "缺少 tools\asar_tool.py"
@@ -844,7 +844,7 @@ function Extract-EnglishFiles {
     $resolved = Resolve-ClaudeResources
     Write-Host "  Claude: $($resolved.ClaudePath)"
 
-    $dataDir = Join-Path $scriptDir "..\\data"
+$dataDir = Join-Path $scriptDir "..\data"
     $templateDir = Join-Path $dataDir "template"
 
     $asarPath = Join-Path $resolved.ResourcesPath "ion-dist.asar"
@@ -853,7 +853,7 @@ function Extract-EnglishFiles {
         Write-Host "[2/3] 从 ion-dist.asar 提取 (新版布局)..."
         $python = Find-PythonCommand
         if (-not $python) { throw "需要 Python 3" }
-        $asarTool = Join-Path $scriptDir "..\\tools\\asar_tool.py"
+$asarTool = Join-Path $scriptDir "..\tools\asar_tool.py"
         $workDir = Join-Path ([System.IO.Path]::GetTempPath()) "claude-zh-extract"
         if (Test-Path -LiteralPath $workDir) { Remove-Item -LiteralPath $workDir -Recurse -Force -ErrorAction SilentlyContinue }
         & $python $asarTool "extract" $asarPath $workDir
