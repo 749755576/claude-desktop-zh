@@ -88,6 +88,8 @@ def extract(asar_path, out_dir):
                 with open(target, "wb") as f:
                     f.write(data)
                 count += 1
+                if count % 500 == 0:
+                    print(f"  已解包 {count} 个文件...", flush=True)
 
     walk(files["files"], "")
     print(f"已解包 {count} 个文件到 {out_dir}")
@@ -140,6 +142,8 @@ def build(orig_asar, out_dir, out_asar):
                         payloads[rel] = f.read()
                 else:
                     payloads[rel] = _read_payload(orig_asar, data_start, child)
+                if len(payloads) % 500 == 0:
+                    print(f"  已读取 {len(payloads)} 个文件...", flush=True)
 
     walk(files["files"], "")
 
@@ -212,8 +216,12 @@ def build(orig_asar, out_dir, out_asar):
         f.write(struct.pack("<I", json_size))
         f.write(header_out)
         f.write(b"\x00" * (payload_size - 4 - json_size))
+        written = 0
         for _, data in entries:
             f.write(data)
+            written += 1
+            if written % 500 == 0:
+                print(f"  已写入 {written}/{len(entries)} 个文件...", flush=True)
     print(f"已写入 {out_asar} ({os.path.getsize(out_asar)} 字节, {len(entries)} 个文件, 新增 {added} 个)")
 
 
